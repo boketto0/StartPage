@@ -6,33 +6,32 @@
           <div class="signup-subtitle">Unlock all Features!</div>
         </div>
         <form @submit="signup">
-            <div class="input-wrapper">
-                <input type="text" id="username" v-model="username" placeholder="Username" class="input-text">
-                <!-- <img src="../assets/images/envelope.svg" alt="" class="input-icon" /> -->
-            </div>
-            <div class="input-wrapper">
-                <input type="text" id="username" v-model="username" placeholder="Email" class="input-text">
-                <img src="../assets/images/envelope.svg" alt="" class="input-icon" />
-            </div>
-            <div class="input-wrapper">
-                <input type="text" id="username" v-model="password" placeholder="Password" class="input-text">
-                <img src="../assets/images/shield-slash.svg" alt="" class="input-icon" />
-            </div>
-            <div class="input-wrapper">
-                <input type="text" id="username" v-model="password" placeholder="Confirm Password" class="input-text">
-                <img src="../assets/images/shield-slash.svg" alt="" class="input-icon" />
-            </div>
+          <div class="input-wrapper">
+            <input type="text" id="username" v-model="username" placeholder="Username" class="input-text" />
+            <img src="../assets/images/person.svg" alt="" class="input-icon" />
+          </div>
+          <div class="input-wrapper">
+            <input type="text" id="email" v-model="email" placeholder="Email" class="input-text" />
+            <img src="../assets/images/envelope.svg" alt="" class="input-icon" />
+          </div>
+          <div class="input-wrapper">
+            <input type="password" id="password" v-model="password" placeholder="Password" class="input-text" />
+            <img src="../assets/images/shield-slash.svg" alt="" class="input-icon" />
+          </div>
+          <div class="input-wrapper">
+            <input type="password" id="confirmPassword" v-model="confirmPassword" placeholder="Confirm Password" class="input-text" />
+            <img src="../assets/images/shield-slash.svg" alt="" class="input-icon" />
+          </div>
 
-          <button class="signup-button" type="submit">
-            <div class="signup-button__text">Sign up</div>
-          </button>
+          <CheckboxVue label="Accept terms and conditions"/>
+          <ButtonVue @click="signup" text="Sign up" />
         </form>
-        <span class="signup-text">You have account?<span class="signup-link">Login now</span></span>
+        <span class="signup-text">You have an account?<span class="signup-link">Login now</span></span>
       </div>
       <div class="signup-image">
         <div class="outer-circle">
-          <div class="inner-cicle">
-            <img src='../assets/images/signup_image.svg' alt="" />
+          <div class="inner-circle">
+            <img src="../assets/images/signup_image.svg" alt="" />
           </div>
         </div>
         <div class="signup-text1">Connect with any device.</div>
@@ -41,19 +40,18 @@
     </div>
   </template>
   
-  <script>
-  export const SignupPage = {
-    data() {
-      return {
-        username: "",
-        password: "",
-      };
-    },
-    methods: {
-      signup() {
-        console.log("Попытка входа:", this.username, this.password);
-      },
-    },
+  <script setup lang="ts">
+  import { ref } from 'vue';
+  import ButtonVue from '../components/Button.vue';
+  import CheckboxVue from '../components/Checkbox.vue'
+  
+  const username = ref('');
+  const email = ref('');
+  const password = ref('');
+  const confirmPassword = ref('');
+  
+  const signup = (event: MouseEvent) => {
+    console.log('Попытка регистрации:', username.value, email.value, password.value, confirmPassword.value);
   };
   </script>
   
@@ -66,10 +64,6 @@
   }
   
   .signup-divider {
-    display: flex;
-    justify-content: baseline;
-    align-items: center;
-    flex-direction: row;
     margin-top: 25px;
     text-align: left;
   }
@@ -95,14 +89,13 @@
   }
   
   .signup-subtitle {
-    font-family: 'Monseratt', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     color: #71717A;
     font-size: 15px;
     font-style: normal;
     font-weight: 400;
     line-height: 24px;
-    margin-right: 36px;
-    margin-left: 36px;
+    align-self: baseline;
   }
   
   .signup-text {
@@ -116,10 +109,10 @@
     margin-top: 20px;
   }
   
-  .signup-link  {
+  .signup-link {
     color: #8098F9;
     font-family: 'Montserrat', sans-serif;
-    line-height: 150%; 
+    line-height: 150%;
     font-size: 16px;
     font-weight: 700;
     cursor: pointer;
@@ -127,18 +120,12 @@
   
   .input-text {
     color: rgba(45, 49, 166, 0.20);
-    font-family: Inter;
+    font-family: 'Inter';
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
-    line-height: 24px; 
+    line-height: 24px;
     padding-left: 48px;
-  }
-  
-  .signup-divider__line {
-    background: #71717A;
-    width: 120px;
-    height: 1px;
   }
   
   .signup-image {
@@ -150,16 +137,11 @@
     justify-content: center;
     flex-direction: column;
   }
+  
   .signup-form {
     display: flex;
     flex-direction: column;
     gap: 10px;
-  }
-  
-  .input-icon {
-    display: flex;
-    align-items: center;
-    margin-right: 10px;
   }
   
   input {
@@ -198,8 +180,8 @@
   
   .input-icon {
     position: absolute;
-    left: 10px; 
-    top: 50%;
+    left: 10px;
+    top: 44%;
     transform: translateY(-50%);
     max-height: 24px;
   }
@@ -224,7 +206,7 @@
     background: linear-gradient(163deg, rgba(68, 76, 231, 0.16) 6.85%, rgba(0, 0, 0, 0.00) 89.34%), radial-gradient(50% 50% at 50% 50%, rgba(68, 76, 231, 0.16) 0%, rgba(68, 76, 231, 0.06) 100%);
   }
   
-  .inner-cicle {
+  .inner-circle {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -253,6 +235,5 @@
     font-weight: 500;
     line-height: 150%;
   }
-  
   </style>
   

@@ -18,9 +18,7 @@
           </div>
           <input type="password" id="password" v-model="password" placeholder="Password" class="input-text" />
         </div>
-        <button class="login-button" type="submit">
-          <div class="login-button__text">Log in</div>
-        </button>
+        <ButtonVue @onClick="login" text="Log in"/>
       </form>
       <span class="login-text">Don’t have account? <span class="login-link">Create an account</span></span>
     </div>
@@ -36,19 +34,17 @@
   </div>
 </template>
 
-<script>
-export const LoginPage = {
-  data() {
-    return {
-      username: "",
-      password: "",
-    };
-  },
-  methods: {
-    login() {
-      console.log("Попытка входа:", this.username, this.password);
-    },
-  },
+<script setup lang="ts">
+import { ref } from 'vue';
+import ButtonVue from '../components/Button.vue';
+
+const username = ref('');
+const email = ref('');
+const password = ref('');
+const confirmPassword = ref('');
+
+const login = (event: MouseEvent) => {
+  console.log('Попытка регистрации:', username.value, email.value, password.value, confirmPassword.value);
 };
 </script>
 
