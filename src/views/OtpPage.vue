@@ -1,40 +1,31 @@
 <template>
-    <div class="signup-page">
-      <div class="signup-content">
-        <div class="signup-title">Create your account</div>
-        <div class="signup-divider">
-          <div class="signup-subtitle">Unlock all Features!</div>
+    <div class="otp-page">
+      <div class="otp-content">
+        <div class="otp-title">Enter OTP</div>
+        <div class="otp-divider">
+          <div class="otp-subtitle">Sent OTP on <span class="otp-link">johndoe@gmail.com</span></div>
         </div>
-        <form @submit="signup">
-          <div class="input-wrapper">
-            <input type="text" id="username" v-model="username" placeholder="Username" class="input-text" />
-            <img src="../assets/images/person.svg" alt="" class="input-icon" />
-          </div>
-          <div class="input-wrapper">
-            <input type="text" id="email" v-model="email" placeholder="Email" class="input-text" />
-            <img src="../assets/images/envelope.svg" alt="" class="input-icon" />
-          </div>
-          <div class="input-wrapper">
-            <input type="password" id="password" v-model="password" placeholder="Password" class="input-text" />
-            <img src="../assets/images/shield-slash.svg" alt="" class="input-icon" />
-          </div>
-          <div class="input-wrapper">
-            <input type="password" id="confirmPassword" v-model="confirmPassword" placeholder="Confirm Password" class="input-text" />
-            <img src="../assets/images/shield-slash.svg" alt="" class="input-icon" />
-          </div>
+        <div class="otp-email__link">Change email</div>
+        <form @submit="otp">
+            <div class="otp-code">
+                <input type="text" v-model="code" maxlength="1" class="otp-code-input" />
+                <input type="text" v-model="code" maxlength="1" class="otp-code-input" />
+                <input type="text" v-model="code" maxlength="1" class="otp-code-input" />
+                <input type="text" v-model="code" maxlength="1" class="otp-code-input" />
+                <input type="text" v-model="code" maxlength="1" class="otp-code-input" />
+                <input type="text" v-model="code" maxlength="1" class="otp-code-input" />
+              </div>
+          <ButtonVue @onClick="otp" text="Submit"/>
         </form>
-        <CheckboxVue label="Accept terms and conditions"/>
-        <ButtonVue @click="signup" text="Sign up" />
-        <span class="signup-text">You have an account?<span class="signup-link">Login now</span></span>
       </div>
-      <div class="signup-image">
+      <div class="otp-image">
         <div class="outer-circle">
-          <div class="inner-circle">
-            <img src="../assets/images/signup_image.svg" alt="" />
+          <div class="inner-cicle">
+            <img src='../assets/images/otp_image.svg' alt="" />
           </div>
         </div>
-        <div class="signup-text1">Connect with any device.</div>
-        <div class="signup-text2">Everything you need is an internet connection.</div>
+        <div class="otp-text1">It's just OTP verification</div>
+        <div class="otp-text2">You are one step away from recovering your password.</div>
       </div>
     </div>
   </template>
@@ -42,32 +33,34 @@
   <script setup lang="ts">
   import { ref } from 'vue';
   import ButtonVue from '../components/Button.vue';
-  import CheckboxVue from '../components/Checkbox.vue'
   
   const username = ref('');
   const email = ref('');
   const password = ref('');
   const confirmPassword = ref('');
   
-  const signup = (event: MouseEvent) => {
+  const otp = (event: MouseEvent) => {
     console.log('Попытка регистрации:', username.value, email.value, password.value, confirmPassword.value);
   };
   </script>
   
   <style scoped lang="scss">
-  .signup-page {
+  .otp-page {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
   }
   
-  .signup-divider {
-    margin-top: 25px;
-    text-align: left;
+  .otp-divider {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    margin: 25px;
   }
   
-  .signup-content {
+  .otp-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -78,7 +71,7 @@
     height: 100vh;
   }
   
-  .signup-title {
+  .otp-title {
     color: #09090B;
     font-size: 40px;
     font-style: normal;
@@ -86,18 +79,28 @@
     line-height: 60%;
     font-family: 'Monseratt', sans-serif;
   }
+
+  .otp-email__link {
+    color: #8098F9;
+    font-family: 'Monseratt', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+  }
   
-  .signup-subtitle {
-    font-family: 'Montserrat', sans-serif;
+  .otp-subtitle {
+    font-family: 'Monseratt', sans-serif;
     color: #71717A;
     font-size: 15px;
     font-style: normal;
     font-weight: 400;
     line-height: 24px;
-    align-self: baseline;
+    margin-right: 36px;
+    margin-left: 36px;
   }
   
-  .signup-text {
+  .otp-text {
     color: #71717A;
     text-align: center;
     font-family: Montserrat;
@@ -108,26 +111,32 @@
     margin-top: 20px;
   }
   
-  .signup-link {
+  .otp-link  {
     color: #8098F9;
     font-family: 'Montserrat', sans-serif;
-    line-height: 150%;
-    font-size: 16px;
-    font-weight: 700;
+    line-height: 150%; 
+    font-size: 20px;
+    font-weight: 600;
     cursor: pointer;
   }
   
   .input-text {
     color: rgba(45, 49, 166, 0.20);
-    font-family: 'Inter';
+    font-family: Inter;
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
-    line-height: 24px;
+    line-height: 24px; 
     padding-left: 48px;
   }
   
-  .signup-image {
+  .otp-divider__line {
+    background: #71717A;
+    width: 120px;
+    height: 1px;
+  }
+  
+  .otp-image {
     height: 100%;
     width: 50%;
     background: #6172F3;
@@ -136,11 +145,16 @@
     justify-content: center;
     flex-direction: column;
   }
-  
-  .signup-form {
+  .otp-form {
     display: flex;
     flex-direction: column;
     gap: 10px;
+  }
+  
+  .input-icon {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
   }
   
   input {
@@ -160,7 +174,7 @@
     margin-bottom: 10px;
   }
   
-  .signup-button {
+  .otp-button {
     background-color: #8098F9;
     margin-top: 25px;
     width: 453px;
@@ -179,13 +193,13 @@
   
   .input-icon {
     position: absolute;
-    left: 10px;
-    top: 44%;
+    left: 10px; 
+    top: 50%;
     transform: translateY(-50%);
     max-height: 24px;
   }
   
-  .signup-button__text {
+  .otp-button__text {
     color: #FFF;
     font-family: 'Inter', sans-serif;
     font-size: 20px;
@@ -205,7 +219,7 @@
     background: linear-gradient(163deg, rgba(68, 76, 231, 0.16) 6.85%, rgba(0, 0, 0, 0.00) 89.34%), radial-gradient(50% 50% at 50% 50%, rgba(68, 76, 231, 0.16) 0%, rgba(68, 76, 231, 0.06) 100%);
   }
   
-  .inner-circle {
+  .inner-cicle {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -215,26 +229,49 @@
     background: linear-gradient(174deg, rgba(164, 188, 253, 0.20) 4.83%, rgba(68, 76, 231, 0.16) 91.13%), radial-gradient(50% 50% at 50% 50%, rgba(68, 76, 231, 0.16) 0%, rgba(68, 76, 231, 0.06) 100%);
   }
   
-  .signup-text1,
-  .signup-text2 {
+  .otp-text1,
+  .otp-text2 {
     text-align: center;
     font-family: 'Montserrat', sans-serif;
+  }
+
+  .otp-code {
+    display: flex;
+    gap: 10px;
+  }
+
+  .otp-code-input {
+    display: flex;
+    width: 64px;
+    height: 64px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: 2px solid rgba(128, 152, 249, 0.50);
+    background: rgba(128, 152, 249, 0.10);
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
     font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
   }
   
-  .signup-text1 {
+  .otp-text1 {
     color: #E0EAFF;
     font-size: 20px;
     font-weight: 700;
     line-height: 120%;
   }
   
-  .signup-text2 {
+  .otp-text2 {
     color: rgba(224, 234, 255, 0.75);
     font-size: 16px;
     font-weight: 500;
     line-height: 150%;
   }
-
+  
   </style>
   
