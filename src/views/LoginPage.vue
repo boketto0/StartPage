@@ -1,6 +1,7 @@
 <template>
   <div class="login-page">
     <div class="login-content">
+      <div class="login-content__wrapper">
       <div class="login-title">Login to your Account</div>
       <div class="login-divider">
         <div class="login-divider__line"></div>
@@ -20,7 +21,8 @@
         </div>
         <ButtonVue @onClick="login" text="Log in"/>
       </form>
-      <span class="login-text">Don’t have account? <span class="login-link">Create an account</span></span>
+      <span class="login-text">Don’t have account? <router-link to="/signup" class="login-link">Create an account</router-link></span>
+    </div>
     </div>
     <div class="login-image">
       <div class="outer-circle">
@@ -73,6 +75,14 @@ const login = (event: MouseEvent) => {
   align-items: center;
   background: #F5F8FF;
   height: 100vh;
+}
+
+.login-content__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  align-items: center;
 }
 
 .login-title {
