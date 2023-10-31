@@ -19,7 +19,9 @@
           </div>
           <input type="password" id="password" v-model="password" placeholder="Password" class="input-text" />
         </div>
-        <ButtonVue @onClick="login" text="Log in"/>
+        <router-link to="/otp">
+          <ButtonVue @onClick="redirectToOtpPage" text="Log in"/>
+        </router-link>
       </form>
       <span class="login-text">Don’t have account? <router-link to="/signup" class="login-link">Create an account</router-link></span>
     </div>
@@ -39,14 +41,21 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import ButtonVue from '../components/Button.vue';
+import { useRouter } from 'vue-router';
 
 const username = ref('');
 const email = ref('');
 const password = ref('');
 const confirmPassword = ref('');
+const router = useRouter();
+import route from '../routes/route';
 
 const login = (event: MouseEvent) => {
   console.log('Попытка регистрации:', username.value, email.value, password.value, confirmPassword.value);
+};
+
+const redirectToOtpPage = async () => {
+  await router.push({ name: 'otp' });
 };
 </script>
 

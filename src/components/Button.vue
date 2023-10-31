@@ -3,14 +3,15 @@
       <span class="button-text">{{ text }}</span>
     </button>
   </template>
-    
+  
   <script setup lang="ts">
   import { defineProps } from 'vue';
-    
+  
   const { text } = defineProps(['text']);
-    
   </script>
-    
+  
+  
+  
   <style scoped>
   .custom-button {
     background-color: #8098F9;
@@ -21,7 +22,7 @@
     cursor: pointer;
     align-self: center;
   }
-    
+  
   .button-text {
     color: #FFF;
     font-family: 'Inter', sans-serif;

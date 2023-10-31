@@ -3,24 +3,24 @@
       <div class="otp-content">
         <div class="otp-title">Enter OTP</div>
         <div class="otp-divider">
-          <div class="otp-subtitle">Sent OTP on <span class="otp-link">{{ authStore.email }}</span></div>
+          <div class="otp-subtitle">Sent OTP on <span class="otp-link">johndoe@gmail.com</span></div>
         </div>
         <div class="otp-email__link">Change email</div>
         <form @submit="otp">
-          <div class="otp-code">
-            <input type="text" v-model="code" maxlength="1" class="otp-code-input" />
-            <input type="text" v-model="code" maxlength="1" class="otp-code-input" />
-            <input type="text" v-model="code" maxlength="1" class="otp-code-input" />
-            <input type="text" v-model="code" maxlength="1" class="otp-code-input" />
-            <input type="text" v-model="code" maxlength="1" class="otp-code-input" />
-            <input type="text" v-model="code" maxlength="1" class="otp-code-input" />
-          </div>
-          <Button @click="otp" text="Submit"/>
+            <div class="otp-code">
+                <input type="text" v-model="code" maxlength="1" class="otp-code-input" />
+                <input type="text" v-model="code" maxlength="1" class="otp-code-input" />
+                <input type="text" v-model="code" maxlength="1" class="otp-code-input" />
+                <input type="text" v-model="code" maxlength="1" class="otp-code-input" />
+                <input type="text" v-model="code" maxlength="1" class="otp-code-input" />
+                <input type="text" v-model="code" maxlength="1" class="otp-code-input" />
+              </div>
+          <Button @onClick="otp" text="Submit"/>
         </form>
       </div>
       <div class="otp-image">
         <div class="outer-circle">
-          <div class="inner-circle">
+          <div class="inner-cicle">
             <img src='../assets/images/otp_image.svg' alt="" />
           </div>
         </div>
@@ -29,22 +29,20 @@
       </div>
     </div>
   </template>
-  
-  <script setup>
+
+  <script setup lang="ts">
   import { ref } from 'vue';
   import Button from '../components/Button.vue';
-  import { useAuthStore } from '../components/store.ts';
-  import { useRoute } from 'vue-router'; // Импорт для использования маршрута
+  import { useRouter } from 'vue-router'; 
+  import route from '../routes/route';
   
-  const authStore = useAuthStore();
-  const code = ref('');
+  const username = ref('');
+  const email = ref('');
+  const password = ref('');
+  const confirmPassword = ref('');
   
-  const otp = () => {
-    console.log('Попытка регистрации:', authStore.email, code.value);
-    const route = useRoute(); // Использование маршрута
-    if (route.name === 'otp') {
-      // Действия для маршрута 'otp'
-    }
+  const otp = (event: MouseEvent) => {
+    console.log('Попытка регистрации:', username.value, email.value, password.value, confirmPassword.value);
   };
   </script>
 
@@ -83,7 +81,6 @@
     line-height: 60%;
     font-family: 'Monseratt', sans-serif;
   }
-
   .otp-email__link {
     color: #8098F9;
     font-family: 'Monseratt', sans-serif;
@@ -238,12 +235,10 @@
     text-align: center;
     font-family: 'Montserrat', sans-serif;
   }
-
   .otp-code {
     display: flex;
     gap: 10px;
   }
-
   .otp-code-input {
     display: flex;
     width: 64px;
@@ -278,4 +273,3 @@
   }
   
   </style>
-  

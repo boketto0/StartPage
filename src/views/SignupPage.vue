@@ -24,7 +24,9 @@
         </div>
       </form>
       <Checkbox label="Accept terms and conditions"/>
-      <Button @click="signup" text="Sign up" />
+      <router-link to="/otp">
+        <Button @click="redirectToOtpPage" text="Sign up" />
+      </router-link>
       <span class="signup-text">You have an account?<router-link to="/" class="signup-link">Login now</router-link></span>
     </div>
     <div class="signup-image">
@@ -50,9 +52,14 @@ const email = ref('');
 const password = ref('');
 const confirmPassword = ref('');
 const router = useRouter();
+import route from '../routes/route';
 
 const signup = async (event: MouseEvent) => {
   console.log('Попытка регистрации:', username.value, email.value, password.value, confirmPassword.value);
+  await router.push({ name: 'otp' });
+};
+
+const redirectToOtpPage = async () => {
   await router.push({ name: 'otp' });
 };
 </script>
