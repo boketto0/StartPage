@@ -1,22 +1,25 @@
-import { createPinia } from 'pinia';
+import { createPinia, defineStore } from 'pinia';
 
-export const pinia = createPinia();
+const pinia = createPinia();
 
-export const useAuthStore = pinia.defineStore('auth', {
+export const useAuthStore = defineStore({
+  id: 'auth',
   state: () => ({
     username: '',
     password: '',
     email: '',
   }),
   actions: {
-    setUsername(username: string) {
+    setUsername(username) {
       this.username = username;
     },
-    setPassword(password: string) {
+    setPassword(password) {
       this.password = password;
     },
-    setEmail(email: string) {
+    setEmail(email) {
       this.email = email;
     },
   },
 });
+
+export { pinia };

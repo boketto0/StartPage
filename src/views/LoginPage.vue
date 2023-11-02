@@ -2,29 +2,34 @@
   <div class="login-page">
     <div class="login-content">
       <div class="login-content__wrapper">
-      <div class="login-title">Login to your Account</div>
-      <div class="login-divider">
-        <div class="login-divider__line"></div>
-        <div class="login-subtitle">with email</div>
-        <div class="login-divider__line"></div>
-      </div>
-      <form @submit="login">
-        <div class="input-wrapper">
-          <input type="text" id="username" v-model="username" placeholder="Email" class="input-text">
-          <img src="../assets/images/envelope.svg" alt="" class="input-icon" />
+        <div class="login-title">Login to your Account</div>
+        <div class="login-divider">
+          <div class="login-divider__line"></div>
+          <div class="login-subtitle">with email</div>
+          <div class="login-divider__line"></div>
         </div>
-        <div class="input-wrapper">
-          <div class="input-icon">
-            <img src='../assets/images/shield-slash.svg' alt="" />
+        <form @submit="login">
+          <div class="input-wrapper">
+            <input type="text" id="username" v-model="username" placeholder="Email" class="input-text">
+            <img src="../assets/images/envelope.svg" alt="" class="input-icon" />
           </div>
-          <input type="password" id="password" v-model="password" placeholder="Password" class="input-text" />
-        </div>
-        <router-link to="/otp">
-          <ButtonVue @onClick="redirectToOtpPage" text="Log in"/>
-        </router-link>
-      </form>
-      <span class="login-text">Don’t have account? <router-link to="/signup" class="login-link">Create an account</router-link></span>
-    </div>
+          <div class="input-wrapper">
+            <div class="input-icon">
+              <img src='../assets/images/shield-slash.svg' alt="" />
+            </div>
+            <div class="input-wrapper">
+              <input type="password" id="password" v-model="password" placeholder="Password" class="input-text" />
+              <div class="input-icon" style="position: relative;">
+                <img src='../assets/images/eye-slash.svg' alt="" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%);" />
+              </div>
+            </div>
+          </div>
+          <router-link :to="{ name: 'otp' }">
+            <ButtonVue text="Log in"/>
+          </router-link>
+        </form>
+        <span class="login-text">Don’t have an account? <router-link to="/signup" class="login-link">Create an account</router-link></span>
+      </div>
     </div>
     <div class="login-image">
       <div class="outer-circle">
@@ -42,22 +47,21 @@
 import { ref } from 'vue';
 import ButtonVue from '../components/Button.vue';
 import { useRouter } from 'vue-router';
+import { useAuthStore } from "../components/store";
 
 const username = ref('');
-const email = ref('');
 const password = ref('');
-const confirmPassword = ref('');
+const email = ref('');
 const router = useRouter();
-import route from '../routes/route';
+const authStore = useAuthStore();
 
-const login = (event: MouseEvent) => {
-  console.log('Попытка регистрации:', username.value, email.value, password.value, confirmPassword.value);
-};
-
-const redirectToOtpPage = async () => {
-  await router.push({ name: 'otp' });
+const login = () => {
+  authStore.setUsername(username.value);
+  authStore.setEmail(email.value);
+  authStore.setPassword(password.value);
 };
 </script>
+
 
 <style scoped lang="scss">
 .login-page {
@@ -132,6 +136,7 @@ const redirectToOtpPage = async () => {
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .input-text {

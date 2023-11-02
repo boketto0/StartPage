@@ -1,8 +1,8 @@
 <template>
   <div class="signup-page">
     <div class="signup-content">
-      <div class="signup-title">Create your account</div>
-      <div class="signup-divider">
+      <div class="signup-list">
+        <div class="signup-title">Create your account</div>
         <div class="signup-subtitle">Unlock all Features!</div>
       </div>
       <form @submit="signup">
@@ -17,14 +17,20 @@
         <div class="input-wrapper">
           <input type="password" id="password" v-model="password" placeholder="Password" class="input-text" />
           <img src="../assets/images/shield-slash.svg" alt="" class="input-icon" />
+          <div class="input-icon" style="position: relative;">
+            <img src='../assets/images/eye-slash.svg' alt="" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%);" />
+          </div>
         </div>
         <div class="input-wrapper">
           <input type="password" id="confirmPassword" v-model="confirmPassword" placeholder="Confirm Password" class="input-text" />
           <img src="../assets/images/shield-slash.svg" alt="" class="input-icon" />
+          <div class="input-icon" style="position: relative;">
+            <img src='../assets/images/eye-slash.svg' alt="" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%);" />
+          </div>
         </div>
       </form>
-      <Checkbox label="Accept terms and conditions"/>
-      <router-link to="/otp">
+      <Checkbox style="align-self:baseline; margin-left: 86px;" label="Accept terms and conditions"/>
+      <router-link :to="{ name: 'otp', params: { email: email }}" class="signup-link">
         <Button @click="redirectToOtpPage" text="Sign up" />
       </router-link>
       <span class="signup-text">You have an account?<router-link to="/" class="signup-link">Login now</router-link></span>
@@ -46,21 +52,23 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import Button from '../components/Button.vue';
 import Checkbox from '../components/Checkbox.vue';
+import { useAuthStore } from '../components/store';
 
 const username = ref('');
 const email = ref('');
 const password = ref('');
 const confirmPassword = ref('');
 const router = useRouter();
-import route from '../routes/route';
-
-const signup = async (event: MouseEvent) => {
-  console.log('Попытка регистрации:', username.value, email.value, password.value, confirmPassword.value);
-  await router.push({ name: 'otp' });
-};
+const authStore = useAuthStore();
 
 const redirectToOtpPage = async () => {
   await router.push({ name: 'otp' });
+};
+
+const signup = (event: MouseEvent) => {
+  authStore.setUsername(username.value);
+  authStore.setEmail(email.value);
+  authStore.setPassword(password.value);
 };
 </script>
 
@@ -75,6 +83,16 @@ const redirectToOtpPage = async () => {
 .signup-divider {
   margin-top: 25px;
   text-align: left;
+}
+
+.signup-list {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  margin-bottom: 25px;
+  flex-direction: column;
+  gap: 8px;
+  margin-right: 52px;
 }
 
 .signup-content {
@@ -125,6 +143,7 @@ const redirectToOtpPage = async () => {
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .input-text {

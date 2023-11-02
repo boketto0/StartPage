@@ -1,27 +1,27 @@
 <template>
     <div class="otp-page">
       <div class="otp-content">
-        <div class="otp-title">Enter OTP</div>
-        <div class="otp-divider">
-          <div class="otp-subtitle">Sent OTP on <span class="otp-link">johndoe@gmail.com</span></div>
+        <div class="otp-list">
+          <div class="otp-title">Enter OTP</div>
+          <div class="otp-subtitle">Sent OTP on <span class="otp-link">{{ authStore.email }}</span></div>
+          <div class="otp-email__link">Change email</div>
         </div>
-        <div class="otp-email__link">Change email</div>
         <form @submit="otp">
-            <div class="otp-code">
-                <input type="text" v-model="code" maxlength="1" class="otp-code-input" />
-                <input type="text" v-model="code" maxlength="1" class="otp-code-input" />
-                <input type="text" v-model="code" maxlength="1" class="otp-code-input" />
-                <input type="text" v-model="code" maxlength="1" class="otp-code-input" />
-                <input type="text" v-model="code" maxlength="1" class="otp-code-input" />
-                <input type="text" v-model="code" maxlength="1" class="otp-code-input" />
-              </div>
-          <Button @onClick="otp" text="Submit"/>
+          <div class="otp-code">
+            <input type="text" v-model="code" maxlength="1" class="otp-code-input" />
+            <input type="text" v-model="code" maxlength="1" class="otp-code-input" />
+            <input type="text" v-model="code" maxlength="1" class="otp-code-input" />
+            <input type="text" v-model="code" maxlength="1" class="otp-code-input" />
+            <input type="text" v-model="code" maxlength="1" class="otp-code-input" />
+            <input type="text" v-model="code" maxlength="1" class="otp-code-input" />
+          </div>
+          <Button @onClick="otp" text="Submit" />
         </form>
       </div>
       <div class="otp-image">
         <div class="outer-circle">
           <div class="inner-cicle">
-            <img src='../assets/images/otp_image.svg' alt="" />
+            <img src="../assets/images/otp_image.svg" alt="" />
           </div>
         </div>
         <div class="otp-text1">It's just OTP verification</div>
@@ -29,37 +29,28 @@
       </div>
     </div>
   </template>
-
+  
   <script setup lang="ts">
   import { ref } from 'vue';
   import Button from '../components/Button.vue';
-  import { useRouter } from 'vue-router'; 
-  import route from '../routes/route';
+  import { useRouter } from 'vue-router';
+  import { useAuthStore } from '../components/store';
   
-  const username = ref('');
-  const email = ref('');
-  const password = ref('');
-  const confirmPassword = ref('');
+  const code = ref('');
+  const router = useRouter();
+  const authStore = useAuthStore();
   
   const otp = (event: MouseEvent) => {
-    console.log('Попытка регистрации:', username.value, email.value, password.value, confirmPassword.value);
+
   };
   </script>
-
+  
   <style scoped lang="scss">
   .otp-page {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-  }
-  
-  .otp-divider {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: row;
-    margin: 25px;
   }
   
   .otp-content {
@@ -81,6 +72,7 @@
     line-height: 60%;
     font-family: 'Monseratt', sans-serif;
   }
+  
   .otp-email__link {
     color: #8098F9;
     font-family: 'Monseratt', sans-serif;
@@ -88,6 +80,7 @@
     font-style: normal;
     font-weight: 700;
     line-height: 24px;
+    cursor: pointer;
   }
   
   .otp-subtitle {
@@ -101,78 +94,64 @@
     margin-left: 36px;
   }
   
-  .otp-text {
-    color: #71717A;
-    text-align: center;
-    font-family: Montserrat;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 24px;
-    margin-top: 20px;
+  .otp-list {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+    margin-right: 120px;
+    align-self: first baseline;
   }
   
-  .otp-link  {
+  .otp-link {
     color: #8098F9;
     font-family: 'Montserrat', sans-serif;
-    line-height: 150%; 
+    line-height: 150%;
     font-size: 20px;
     font-weight: 600;
     cursor: pointer;
   }
   
-  .input-text {
-    color: rgba(45, 49, 166, 0.20);
-    font-family: Inter;
+  .otp-code-input {
+    width: 64px;
+    height: 64px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: 2px solid rgba(128, 152, 249, 0.50);
+    background: rgba(128, 152, 249, 0.10);
+    font-family: 'Inter', sans-serif;
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
-    line-height: 24px; 
-    padding-left: 48px;
+    line-height: 24px;
+    position: relative;
+    margin-bottom: 10px;
   }
   
-  .otp-divider__line {
-    background: #71717A;
-    width: 120px;
-    height: 1px;
-  }
-  
-  .otp-image {
-    height: 100%;
-    width: 50%;
-    background: #6172F3;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
-  .otp-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  .otp-code-input::before {
+    content: "-";
+    color: rgba(45, 49, 166, 0.20);
+    font-family: 'Inter', sans-serif;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    display: inline-block;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
   }
   
   .input-icon {
     display: flex;
     align-items: center;
     margin-right: 10px;
-  }
-  
-  input {
-    width: 400px;
-    height: 64px;
-    border: 2px solid rgba(128, 152, 249, 0.50);
-    background: rgba(128, 152, 249, 0.10);
-    border-radius: 10px;
-    font-family: 'Inter', sans-serif;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: baseline;
-    margin-bottom: 10px;
   }
   
   .otp-button {
@@ -194,7 +173,7 @@
   
   .input-icon {
     position: absolute;
-    left: 10px; 
+    left: 10px;
     top: 50%;
     transform: translateY(-50%);
     max-height: 24px;
@@ -230,32 +209,24 @@
     background: linear-gradient(174deg, rgba(164, 188, 253, 0.20) 4.83%, rgba(68, 76, 231, 0.16) 91.13%), radial-gradient(50% 50% at 50% 50%, rgba(68, 76, 231, 0.16) 0%, rgba(68, 76, 231, 0.06) 100%);
   }
   
+  .otp-input__icon {
+    color: rgba(45, 49, 166, 0.20);
+    font-family: Inter;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+  }
+  
   .otp-text1,
   .otp-text2 {
     text-align: center;
     font-family: 'Montserrat', sans-serif;
   }
+  
   .otp-code {
     display: flex;
     gap: 10px;
-  }
-  .otp-code-input {
-    display: flex;
-    width: 64px;
-    height: 64px;
-    padding: 10px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    flex-shrink: 0;
-    border-radius: 10px;
-    border: 2px solid rgba(128, 152, 249, 0.50);
-    background: rgba(128, 152, 249, 0.10);
-    font-family: 'Inter', sans-serif;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 24px;
   }
   
   .otp-text1 {
@@ -271,5 +242,5 @@
     font-weight: 500;
     line-height: 150%;
   }
-  
   </style>
+  
