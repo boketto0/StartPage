@@ -10,7 +10,7 @@ const props = defineProps({
 });
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 
 .title-component {
     color: #09090B;

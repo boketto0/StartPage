@@ -1,32 +1,34 @@
 <template>
-    <label class="checkbox">
-      <input type="checkbox" v-model="isChecked" class="checkbox-input" />
-      <span :class="checkboxClasses"></span>
-      <span class="label">{{ label }}</span>
-    </label>
-  </template>
-  
-  <script>
-  export default {
-    props: {
-      label: String,
-      disabled: Boolean,
-    },
-    data() {
-      return {
-        isChecked: false,
-      };
-    },
-    computed: {
-      checkboxClasses() {
-        return {
-          checkmark: true,
-          "checkmark-disabled": this.disabled,
-        };
-      },
-    },
-  };
-  </script>
+  <label class="checkbox">
+    <input type="checkbox" v-model="isChecked" class="checkbox-input" />
+    <span :class="checkboxClasses"></span>
+    <span class="label">{{ label }}</span>
+  </label>
+</template>
+
+<script setup lang="ts">
+import { ref, computed } from 'vue';
+
+export const Checkbox = {
+  props: {
+    label: String,
+    disabled: Boolean,
+  },
+  setup(props) {
+    const isChecked = ref(false);
+
+    const checkboxClasses = computed(() => ({
+      checkmark: true,
+      'checkmark-disabled': props.disabled,
+    }));
+
+    return {
+      isChecked,
+      checkboxClasses,
+    };
+  },
+};
+</script>
   
   <style scoped>
   .checkbox {

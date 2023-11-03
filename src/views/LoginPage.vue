@@ -5,7 +5,9 @@
         <TitleComponent titleText="Login to your Account" />
         <div class="login-divider">
           <div class="login-divider__line"></div>
-          <SubtitleComponent subtitleText="with email" />
+            <span class="login-subtitle__style">
+              <SubtitleComponent subtitleText="with email" />
+            </span>
           <div class="login-divider__line"></div>
         </div>
         <form @submit="signup">
@@ -33,15 +35,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import ButtonComponent from '../components/ButtonComponent.vue';;
+import ButtonComponent from '../components/ButtonComponent.vue'
 import TitleComponent from '../components/TitleComponent.vue'
 import SubtitleComponent from '../components/SubtitleComponent.vue'
 import InputForm from '../components/InputForm.vue'
 import ImageWrapperComponent from '../components/ImageWrapperComponent.vue'
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .page__wrapper {
   display: flex;
   justify-content: space-between;
@@ -54,7 +55,7 @@ import ImageWrapperComponent from '../components/ImageWrapperComponent.vue'
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
-  margin: 25px;
+  margin-bottom: 25px;
 }
 
 .login-content {
@@ -101,6 +102,10 @@ import ImageWrapperComponent from '../components/ImageWrapperComponent.vue'
   background: #71717A;
   width: 120px;
   height: 1px;
+  margin: 20px;
+}
+.login-subtitle__style {
+  margin-bottom: -40px;
 }
 
 </style>

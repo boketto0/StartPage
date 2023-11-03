@@ -3,24 +3,23 @@
         <div v-for="index in inputCount" :key="index" class="input-form__input-wrapper">
             <div class="input__input-inner">
                 <label :for="'input-' + index" class="input-form__input-icon-left">
-                    <!-- <img :src="inputIconsLeft[index - 1]" alt="Input Icon Left" /> -->
+                    <img :src="inputIconsLeft[index - 1]" alt="Input Icon Left" />
                 </label>
                 <input
-                    :id="'input-' + index"
                     class="input-text input-form__input"
                     :type="inputType"
                     v-model="inputValues[index - 1]"
                     :placeholder="inputPlaceholders[index - 1]"
                 />
                 <label :for="'input-' + index" class="input-form__input-icon-right">
-                    <!-- <img :src="inputIconsRight[index - 1]" alt="Input Icon Right" /> -->
+                    <img :src="inputIconsRight[index - 1]" alt="Input Icon Right" />
                 </label>
             </div>
         </div>
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
     import { ref } from 'vue';
 
     const props = defineProps({
@@ -68,16 +67,16 @@
     
 .input-form__input-icon-left {
     position: absolute;
-    left: 0;
-    top: 50%;
+    left: 8%;
+    top: 48%;
     transform: translateY(-50%);
     max-height: 24px;
 }
     
 .input-form__input-icon-right {
     position: absolute;
-    right: 0;
-    top: 50%;
+    right: 50%;
+    top: 48%;
     transform: translateY(-50%);
     max-height: 24px;
 }

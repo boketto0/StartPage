@@ -4,13 +4,13 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const props = defineProps({
     subtitleText: String,
 });
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 
 .subtitle-component {
     font-family: 'Montserrat', sans-serif;

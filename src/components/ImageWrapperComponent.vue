@@ -2,7 +2,7 @@
     <div class="image__wrapper">
         <div class="outer-circle">
             <div class="inner-circle">
-                <img class="image" src="imageSrc" alt="Image block" />
+                <img class="image" :src="imageSrc" alt="Image block" />
             </div>
         </div>
         <span class="image__title">{{ title }}</span>
@@ -11,11 +11,20 @@
 </template>
 
 <script>
-export default {
+import { defineProps } from 'vue';
+
+export const ImageBlock = {
     props: {
         imageSrc: String,
         title: String,
         subtitle: String,
+    },
+    setup(props) {
+        return {
+        imageSrc: defineProps(props).imageSrc,
+        title: defineProps(props).title,
+        subtitle: defineProps(props).subtitle,
+    };
     },
 };
 </script>
