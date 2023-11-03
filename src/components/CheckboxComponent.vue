@@ -33,6 +33,8 @@
     display: inline-flex;
     align-items: center;
     cursor: pointer;
+    align-self: center;
+    margin-left: -258px;
   }
   
   .checkbox input {
